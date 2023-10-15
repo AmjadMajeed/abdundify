@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "587372512720",
+    "project_id": "rento-2034",
+    "storage_bucket": "rento-2034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587372512720:android:aa4a3276681b89c87065d5",
+        "android_client_info": {
+          "package_name": "com.tanzeem.rento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587372512720-36g7iei851dothu2mt8j5at2l38s39it.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanzeem.rento",
+            "certificate_hash": "ed6677ae6a2f7974d367389b93f1cae5e7bce9da"
+          }
+        },
+        {
+          "client_id": "587372512720-a5jql3prusbrcitsbk4355bc7nnq4fup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanzeem.rento",
+            "certificate_hash": "fefddeacfcfd91cf421f645f438b3b7e714b48fd"
+          }
+        },
+        {
+          "client_id": "587372512720-ffsufpcd3o624u84iopgmap65d73g0j3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanzeem.rento",
+            "certificate_hash": "5903a615cd3fb527d03f388c94bc027d0b03a330"
+          }
+        },
+        {
+          "client_id": "587372512720-81b23np70lb3b25jqefmi1j8pmc5pdri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTGmZzAB-psg_jVYHOFBuaAcnH9WRGZHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587372512720-81b23np70lb3b25jqefmi1j8pmc5pdri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "587372512720-u4rnouh957fcfsdohgqd03ipsjqslqn4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tanzeem.rento"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587372512720:android:15951debe6d52cff7065d5",
+        "android_client_info": {
+          "package_name": "com.theAppForce.abundify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587372512720-p3qr3flon0k2sd989tuhr71lh4aom3ve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theAppForce.abundify",
+            "certificate_hash": "fefddeacfcfd91cf421f645f438b3b7e714b48fd"
+          }
+        },
+        {
+          "client_id": "587372512720-81b23np70lb3b25jqefmi1j8pmc5pdri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTGmZzAB-psg_jVYHOFBuaAcnH9WRGZHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587372512720-81b23np70lb3b25jqefmi1j8pmc5pdri.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "587372512720-u4rnouh957fcfsdohgqd03ipsjqslqn4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tanzeem.rento"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
