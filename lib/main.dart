@@ -172,7 +172,7 @@ class MyApp extends StatelessWidget {
         title: "Abundify",
         theme: ThemeData(
         ),
-        // home: SplashScreen(),
+
         home: IntroOne(),
         // home: bottomNavigationBar(0),
         debugShowCheckedModeBanner: false,

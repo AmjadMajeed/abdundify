@@ -172,6 +172,7 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
                         child: TextField(
                           controller: addMoneyController,
                           keyboardType: TextInputType.number,
+                          style: TextStyle(color: Colors.white), // Set the text color of the entered text
                           decoration: InputDecoration(
                             labelText: 'Enter Balance To Add',
                             enabledBorder: OutlineInputBorder(
@@ -180,6 +181,8 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
+                            labelStyle: TextStyle(color: Colors.white), // Text color of the label
+                            hintStyle: TextStyle(color: Colors.white), // Text color of the hint text
                           ),
                         ),
                       )

@@ -64,7 +64,7 @@ class _OTPScreenState extends State<OTPScreen> {
     print("starttimer runs");
     var duration = interval;
     timer = Timer.periodic(duration, (timer) async {
-      print("starttimer runs1111${timer.tick}");
+
       setState(() {
         print(timer.tick);
         currentSeconds = timer.tick;
@@ -296,9 +296,8 @@ class _OTPScreenState extends State<OTPScreen> {
   _verifyPhone(String phone) async {
     print("12212221212211221");
     await FirebaseAuth.instance.verifyPhoneNumber(
-        ///todo change number to phone
-        // phoneNumber: phone,
-        phoneNumber: "+923457197717",
+
+        phoneNumber: phone,
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance.signInWithCredential(credential);
         },

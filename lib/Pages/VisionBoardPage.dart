@@ -99,18 +99,24 @@ class _MediaSavePageState extends State<MediaSavePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final updatedMediaList = await Navigator.push(
+          final updatedMediaList =
+          await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => AddVisionPage(mediaList: mediaList), // Pass the correct mediaList
             ),
           );
 
-          if (updatedMediaList != null) {
-            setState(() {
-              mediaList = updatedMediaList; // Update the mediaList with the updated data
-            });
-          }
+          if(   updatedMediaList !=null)
+            {
+              _loadMediaList();
+            }
+
+          // if (updatedMediaList != null) {
+          //   setState(() {
+          //     mediaList = updatedMediaList; // Update the mediaList with the updated data
+          //   });
+          // }
         },
 
           child: Icon(Icons.add), // Plus icon
@@ -134,6 +140,9 @@ class _MediaSavePageState extends State<MediaSavePage> {
                   print(mediaList.length);
                   print("mediaList.length");
                   final mediaData = mediaList[index];
+                  print("mediaData.path$index");
+                  print(mediaData.path);
+                  print("mediaData.path");
                   return
                   mediaList.length == 0 ?
                       Center(child: Text("No Data",style: TextStyle(color: Colors.white),))

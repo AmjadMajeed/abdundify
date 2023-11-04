@@ -1,6 +1,7 @@
 import 'package:abundify/FourPortionsPageTwo.dart';
 import 'package:abundify/Utils/Colors.dart';
 import 'package:abundify/Utils/Constants.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +22,8 @@ class AffirmationListScreen extends StatefulWidget {
 
 class _AffirmationListScreenState extends State<AffirmationListScreen> {
   final AffirmationController affirmationController = Get.put(AffirmationController());
-   String? profilePicUrl;
+  String? profilePicUrl;
+  String newAffirmation = ''; // To store the new affirmation text
 
 
 
@@ -107,6 +109,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
                 trailing: Icon(Icons.arrow_forward),
               ),
             ),
+
             GestureDetector(
               onTap:(){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingPage()));
@@ -116,15 +119,69 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
                 trailing: Icon(Icons.arrow_forward),
               ),
             ),
+
+
+
             GestureDetector(
               onTap:(){
-               try{
-                 FirebaseAuth.instance.signOut();
-                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                     AuthSelectionScreen()), (Route<dynamic> route) => false);
-               }catch(e){
+                try{
+                  if(FirebaseAuth.instance.currentUser?.uid !=null)
+                  {
+                    AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.question,
+                        animType: AnimType.BOTTOMSLIDE,
+                        title: "Warning",
+                        desc: "Confirm that you want to delete your account permanently, As your data cannot be recovered",
+                        descTextStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white
+                        ),
+                        // btnCancelOnPress: () {},
+                        dialogBackgroundColor: AppColors.MainColor,
+                        btnOkColor: Colors.grey[800],
+                        btnOkText: "Delete",
+                        btnOkOnPress: () {
+                          FirebaseAuth.instance.currentUser?.delete();
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              AuthSelectionScreen()), (Route<dynamic> route) => false);
+                        },
+                        btnCancelText: "No",
+                        btnCancelOnPress: (){
+                          Navigator.pop(context);
+                        }
+                    ).show();
 
-               }
+
+                  }
+                  else
+                  {
+                    AsmDialogg(context,"Error","Your Must Be Register With Us To Delete Account");
+                  }
+
+
+                }catch(e){
+
+                  AsmDialogg(context,"Error","Something Goes Wronge Try Again");
+
+                }
+              },
+              child: ListTile(
+                title: Text("Delete Account"),
+                trailing: Icon(Icons.logout,color: Colors.red,),
+              ),
+            ),
+
+
+            GestureDetector(
+              onTap:(){
+                try{
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                      AuthSelectionScreen()), (Route<dynamic> route) => false);
+                }catch(e){
+
+                }
               },
               child: ListTile(
                 title: Text("LogOut"),
@@ -136,89 +193,128 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
       ),
 
 
-    // floatingActionButton: FloatingActionButton(
-    //   backgroundColor: Colors.white,
-    //     // onPressed: () => _showAddAffirmationDialog(context),
-    //     onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyScreen())),
-    //     child: Icon(Icons.add,color: AppColors.MainBGColor,),
-    //   ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () => _showAddAffirmationDialog(context),
+        child: Icon(Icons.add,color: AppColors.MainBGColor,),
+      ),
 
       body: Container(
         color: AppColors.MainBGColor,
         child: Obx(
               () => PageView.builder(
-                itemCount: affirmationController.affirmations.length,
-                itemBuilder: (context, index) {
-                  final affirmation = affirmationController.affirmations[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Card(
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Container(
-                        color: AppColors.MainBGColor,
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Spacer(),
-                            Padding(
-                              padding:  EdgeInsets.only(left: 30,right: 20,top: 100),
-                              child: Text(
-                                affirmation.text,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+            itemCount: affirmationController.affirmations.length,
+            itemBuilder: (context, index) {
+              final affirmation = affirmationController.affirmations[index];
+              return Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Card(
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    color: AppColors.MainBGColor,
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Spacer(),
+                        Padding(
+                          padding:  EdgeInsets.only(left: 30,right: 20,top: 100),
+                          child: Text(
+                            affirmation.text,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Spacer(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.share,
-                                    size: 34,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () =>
-                                      affirmationController.shareAffirmation(affirmation.text),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    affirmation.isFavorite
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color: affirmation.isFavorite ? Colors.red : Colors.white,
-                                    size: 34,
-                                  ),
-                                  onPressed: () {
-                                    affirmationController.toggleFavorite(affirmation);
-                                    setState(() {
-                                      print("setState runs 111");
-                                    });
-                                  },
-                                ),
-                              ],
+                          ),
+                        ),
+                        Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.share,
+                                size: 34,
+                                color: Colors.white,
+                              ),
+                              onPressed: () =>
+                                  affirmationController.shareAffirmation(affirmation.text),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                affirmation.isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: affirmation.isFavorite ? Colors.red : Colors.white,
+                                size: 34,
+                              ),
+                              onPressed: () {
+                                affirmationController.toggleFavorite(affirmation);
+                                setState(() {
+                                  print("setState runs 111");
+                                });
+                              },
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                },
-                controller: PageController(), // Use a PageController for swiping
-                scrollDirection: Axis.vertical, // Swipe vertically
-                pageSnapping: true, // Ensure one index at a time
-              ),
+                  ),
+                ),
+              );
+            },
+            controller: PageController(), // Use a PageController for swiping
+            scrollDirection: Axis.vertical, // Swipe vertically
+            pageSnapping: true, // Ensure one index at a time
+          ),
 
 
         ),
       ),
     );
   }
+
+  // Function to show a dialog for adding a new affirmation
+  Future<void> _showAddAffirmationDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Add New Affirmation'),
+          content: TextField(
+            onChanged: (value) {
+              setState(() {
+                newAffirmation = value;
+              });
+            },
+            decoration: InputDecoration(
+              hintText: 'Enter your new affirmation...',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Save'),
+              onPressed: () {
+                // Save the new affirmation here (you can add it to the list)
+                affirmationController.addAffirmation(newAffirmation);
+
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

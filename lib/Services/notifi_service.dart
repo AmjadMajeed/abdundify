@@ -42,11 +42,31 @@ class NotificationService {
       print("notification set for $min mins");
       _timer = Timer.periodic(Duration(minutes: min), (Timer timer) {
         scheduleNotification(
-          title: "Hi Amjad!",
-          body: 'Take out some time to manifest more abundance',
+          title: "Hi!",
+          body: 'Take Out Some Time To Manifest More Abundance',
           scheduledNotificationDateTime: DateTime.now().add(Duration(minutes: min)),
         );
-        print("affairmation set successfull");
+        print("affairmation set successfull------------------");
+      });
+    }catch(e){
+      print("error in scheduleRepeatedNotifications method");
+    }
+  }
+
+  // Modify the method to schedule repeated notifications every 1 minute
+  void scheduleRepeatedNotificationsForBlessing(int numberOfNotifications) {
+    print("scheduleRepeatedNotifications runss");
+    try{
+      int totalMinsPerDay = 1440;
+      int min = (totalMinsPerDay / numberOfNotifications).toInt(); // Convert to int
+      print("notification set for $min mins");
+      _timer = Timer.periodic(Duration(minutes: min), (Timer timer) {
+        scheduleNotification(
+          title: "Hi!",
+          body: 'I am blessed',
+          scheduledNotificationDateTime: DateTime.now().add(Duration(minutes: min)),
+        );
+        print("affairmation set successfull------------------");
       });
     }catch(e){
       print("error in scheduleRepeatedNotifications method");
@@ -62,9 +82,9 @@ class NotificationService {
        scheduleNotification(
          title: "You Receive a New Payment",
          body: '\$ $balance Congrats',
-         scheduledNotificationDateTime: DateTime.now().add(Duration(minutes: hours)),
+         scheduledNotificationDateTime: DateTime.now().add(Duration(hours: hours)),
        );
-       print("affairmation set successfull for bank");
+       print("affairmation set successfull for bank+++++++++++++++++++++++");
      });
    }catch(e){
      print("error in scheduleRepeatedNotificationsForBank");

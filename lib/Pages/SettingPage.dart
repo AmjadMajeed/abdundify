@@ -262,7 +262,8 @@ class _SettingPageState extends State<SettingPage> {
 
 
                     NotificationService().scheduleRepeatedNotifications(
-                        int.parse(affairmationController.text.toString().trim()??"2"));
+                        int.parse(affairmationController.text.toString().trim()),
+                    );
 
                     NotificationService().scheduleRepeatedNotificationsForBank(
                         int.parse(bankAccountTimeController.text.toString().trim()),
